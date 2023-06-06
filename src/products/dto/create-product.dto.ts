@@ -16,6 +16,10 @@ export class CreateProductDto {
   @IsString()
   @MinLength(10)
   description: string;
+  @IsArray({ always: true })
+  @IsString({ each: true })
+  @IsOptional()
+  tags: string[];
 
   @IsArray({ always: true })
   @IsString({ each: true })

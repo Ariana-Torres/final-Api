@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "src/categories/entities/category.entity";
+import { Tag } from "src/tags/entities/tag.entity";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity({ name: "products" })
 export class Product {
@@ -13,4 +21,12 @@ export class Product {
 
   @Column({ type: "float" })
   price: number;
+
+  @JoinTable()
+  @ManyToMany(() => Category, (category) => category.products, { eager: true })
+  categories: Category[];
+
+  @JoinTable()
+  @ManyToMany(() => Tag, (tag) => tag.products, { eager: true })
+  tags: Tag[];
 }
