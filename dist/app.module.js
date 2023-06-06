@@ -14,6 +14,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const products_module_1 = require("./products/products.module");
 const categories_module_1 = require("./categories/categories.module");
 const tags_module_1 = require("./tags/tags.module");
+const menu_module_1 = require("./menu/menu.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -33,6 +34,7 @@ AppModule = __decorate([
             products_module_1.ProductsModule,
             categories_module_1.CategoriesModule,
             tags_module_1.TagsModule,
+            menu_module_1.MenuModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
