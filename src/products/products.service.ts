@@ -4,18 +4,44 @@ import { UpdateProductDto } from "./dto/update-product.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from "./entities/product.entity";
 import { In, Repository } from "typeorm";
+import { Tag } from "src/tags/entities/tag.entity";
+import { Category } from "src/categories/entities/category.entity";
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
-    private productRepository: Repository<Product>
+    private productRepository: Repository<Product>,
+    @InjectRepository(Tag)
+    private tagRepo: Repository<Tag>,
+    @InjectRepository(Category)
+    private categoryRepo: Repository<Category>
   ) {}
 
   async create(createProductDto: CreateProductDto) {
-    const product = await this.productRepository.create(createProductDto);
-    await this.productRepository.save(product);
-    return product;
+    const { tags, categories, ...productData } = createProductDto;
+
+    let tagsModels = [];
+    let categoriesModels = [];
+    if (createProductDto.tags) {
+      tagsModels = await this.tagRepo.find({
+        where: { name: In([...createProductDto.tags]) },
+      });
+    }
+    if (createProductDto.categories) {
+      categoriesModels = await this.categoryRepo.find({
+        where: { name: In([...createProductDto.categories]) },
+      });
+    }
+
+    const model = this.productRepository.create({
+      ...productData,
+      categories: categoriesModels,
+      tags: tagsModels,
+    });
+    await this.productRepository.save(model);
+
+    return model;
   }
 
   findAll() {
@@ -26,19 +52,43 @@ export class ProductsService {
     return this.productRepository.findOneBy({ id });
   }
 
-  async update(id: string, updateProductDto: CreateProductDto) {
-    const findCategories = await this.findOne(id);
-    const updateProduct = await this.productRepository.merge(
-      findCategories,
-      updateProductDto
-    );
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    const { tags, categories, ...productData } = updateProductDto;
 
-    return this.productRepository.save(updateProduct);
+    let tagsModels = [];
+    let categoriesModels = [];
+    if (updateProductDto.tags) {
+      tagsModels = await this.tagRepo.find({
+        where: { name: In([...updateProductDto.tags]) },
+      });
+    }
+    if (updateProductDto.categories) {
+      categoriesModels = await this.categoryRepo.find({
+        where: { name: In([...updateProductDto.categories]) },
+      });
+    }
+
+    const product = await this.productRepository.preload({
+      id,
+      ...productData,
+      categories: categoriesModels,
+      tags: tagsModels,
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
+    }
+
+    return this.productRepository.save(product);
   }
 
   async remove(id: string) {
-    const producto = await this.findOne(id);
-    await this.productRepository.remove(producto);
-    return "Product removed successfully";
+    const product = await this.productRepository.findOneBy({ id });
+
+    if (!product) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
+    }
+
+    return this.productRepository.remove(product);
   }
 }

@@ -9,40 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
-const category_entity_1 = require("../../categories/entities/category.entity");
-const tag_entity_1 = require("../../tags/entities/tag.entity");
+exports.Tag = void 0;
+const product_entity_1 = require("../../products/entities/product.entity");
 const typeorm_1 = require("typeorm");
-let Product = class Product {
+let Tag = class Tag {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
-], Product.prototype, "id", void 0);
+], Tag.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Product.prototype, "name", void 0);
+], Tag.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Product.prototype, "description", void 0);
+], Tag.prototype, "slug", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "float" }),
-    __metadata("design:type", Number)
-], Product.prototype, "price", void 0);
-__decorate([
-    (0, typeorm_1.JoinTable)(),
-    (0, typeorm_1.ManyToMany)(() => category_entity_1.Category, (category) => category.products, { eager: true }),
+    (0, typeorm_1.ManyToMany)(() => product_entity_1.Product, (product) => product.tags),
     __metadata("design:type", Array)
-], Product.prototype, "categories", void 0);
-__decorate([
-    (0, typeorm_1.JoinTable)(),
-    (0, typeorm_1.ManyToMany)(() => tag_entity_1.Tag, (tag) => tag.products, { eager: true }),
-    __metadata("design:type", Array)
-], Product.prototype, "tags", void 0);
-Product = __decorate([
-    (0, typeorm_1.Entity)({ name: "products" })
-], Product);
-exports.Product = Product;
-//# sourceMappingURL=product.entity.js.map
+], Tag.prototype, "products", void 0);
+Tag = __decorate([
+    (0, typeorm_1.Entity)({ name: "tags" })
+], Tag);
+exports.Tag = Tag;
+//# sourceMappingURL=tag.entity.js.map
