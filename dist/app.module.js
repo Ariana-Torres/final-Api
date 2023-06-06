@@ -12,6 +12,7 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const products_module_1 = require("./products/products.module");
+const categories_module_1 = require("./categories/categories.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -29,6 +30,7 @@ AppModule = __decorate([
                 autoLoadEntities: true,
             }),
             products_module_1.ProductsModule,
+            categories_module_1.CategoriesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
