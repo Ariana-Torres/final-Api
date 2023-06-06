@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty, IsString, MinLength } from "class-validator";
+import {
+  IsArray,
+  IsNotEmpty,
+  IsString,
+  MinLength,
+  IsOptional,
+} from "class-validator";
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -10,4 +16,9 @@ export class CreateProductDto {
   @IsString()
   @MinLength(10)
   description: string;
+
+  @IsArray({ always: true })
+  @IsString({ each: true })
+  @IsOptional()
+  categories: string[];
 }
