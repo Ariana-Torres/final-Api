@@ -1,0 +1,48 @@
+[33mcommit 46e7c8a523e6a430dcb091db7d02f4e5a9d72639[m[33m ([m[1;36mHEAD -> [m[1;32mwendy[m[33m)[m
+Author: ariana <at5322931@gmail.com>
+Date:   Wed Jun 7 10:46:33 2023 -0600
+
+    modificado unas cosas
+
+[33mcommit e22cc181f932a3255da203256697767537368da2[m[33m ([m[1;31morigin/wendy[m[33m)[m
+Author: wendy <universitariaur@gmail.com>
+Date:   Tue Jun 6 16:22:16 2023 -0600
+
+    creando crud de menu
+
+[33mcommit e9fb5971a4459ae64ae25aa05c3b049a9a7472c6[m
+Author: wendy <universitariaur@gmail.com>
+Date:   Tue Jun 6 16:08:23 2023 -0600
+
+    creado crud de etiquetas y haciendo relaciones de las tablas de etiquetas y categorias a prducto al igual que modificando los servicios de productos
+
+[33mcommit 1246a873a9600741043fbb01652a0bf41b4a8da7[m
+Merge: b9a1109 0022b83
+Author: wendy <universitariaur@gmail.com>
+Date:   Tue Jun 6 15:47:55 2023 -0600
+
+    obteniendo los cambios de ariana
+
+[33mcommit b9a11091706113c7b1c2d797ced02179b8e9e12d[m
+Author: wendy <universitariaur@gmail.com>
+Date:   Tue Jun 6 15:46:54 2023 -0600
+
+    creando mi rama
+
+[33mcommit 0022b834b382833f1e8d2f260964bff3e4bdf1d6[m
+Author: wendy <universitariaur@gmail.com>
+Date:   Tue Jun 6 15:46:04 2023 -0600
+
+    configurando crud categorias
+
+[33mcommit 1bf62ead2a88ae117e9c919e0b74201c80caaaf6[m
+Author: Ariana Torres <at5322931@gmail.com>
+Date:   Tue Jun 6 15:24:00 2023 -0600
+
+    agragando otro crud de categoria
+
+[33mcommit 3d90f6606f4a8b6f5afbc7d97eac0f33bea45531[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Ariana Torres <at5322931@gmail.com>
+Date:   Tue Jun 6 15:07:08 2023 -0600
+
+    iniciando api con el primer crud basico de productos
