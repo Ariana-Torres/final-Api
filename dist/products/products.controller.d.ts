@@ -7,5 +7,5 @@ export declare class ProductsController {
     findAll(): Promise<import("./entities/product.entity").Product[]>;
     findOne(id: string): Promise<import("./entities/product.entity").Product>;
     update(id: string, updateProductDto: CreateProductDto): Promise<import("./entities/product.entity").Product>;
-    remove(id: string): Promise<string>;
+    remove(id: string): Promise<import("./entities/product.entity").Product>;
 }

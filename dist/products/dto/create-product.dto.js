@@ -25,5 +25,17 @@ __decorate([
     (0, class_validator_1.MinLength)(10),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "description", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)({ always: true }),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], CreateProductDto.prototype, "types", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)({ always: true }),
+    (0, class_validator_1.IsString)({ each: true }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], CreateProductDto.prototype, "categories", void 0);
 exports.CreateProductDto = CreateProductDto;
 //# sourceMappingURL=create-product.dto.js.map
