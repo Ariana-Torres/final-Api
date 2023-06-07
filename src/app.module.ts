@@ -4,12 +4,9 @@ import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProductsModule } from "./products/products.module";
 import { CategoriesModule } from "./categories/categories.module";
-<<<<<<< HEAD
-import { TagsModule } from "./tags/tags.module";
-import { MenuModule } from "./menu/menu.module";
-=======
 import { TypeModule } from "./type/type.module";
->>>>>>> ariana
+import { MenuModule } from "./menu/menu.module";
+import { ClientsModule } from "./clients/clients.module";
 
 @Module({
   imports: [
@@ -26,12 +23,9 @@ import { TypeModule } from "./type/type.module";
     }),
     ProductsModule,
     CategoriesModule,
-<<<<<<< HEAD
-    TagsModule,
-    MenuModule,
-=======
     TypeModule,
->>>>>>> ariana
+    MenuModule,
+    ClientsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
