@@ -1,5 +1,5 @@
 import { Category } from "src/categories/entities/category.entity";
-import { Tag } from "src/tags/entities/tag.entity";
+import { Type } from "src/type/entities/type.entity";
 import {
   Column,
   Entity,
@@ -27,6 +27,6 @@ export class Product {
   categories: Category[];
 
   @JoinTable()
-  @ManyToMany(() => Tag, (tag) => tag.products, { eager: true })
-  tags: Tag[];
+  @ManyToMany(() => Type, (type) => type.products, { eager: true })
+  types: Type[];
 }

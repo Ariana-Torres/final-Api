@@ -4,8 +4,12 @@ import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProductsModule } from "./products/products.module";
 import { CategoriesModule } from "./categories/categories.module";
+<<<<<<< HEAD
 import { TagsModule } from "./tags/tags.module";
 import { MenuModule } from "./menu/menu.module";
+=======
+import { TypeModule } from "./type/type.module";
+>>>>>>> ariana
 
 @Module({
   imports: [
@@ -22,8 +26,12 @@ import { MenuModule } from "./menu/menu.module";
     }),
     ProductsModule,
     CategoriesModule,
+<<<<<<< HEAD
     TagsModule,
     MenuModule,
+=======
+    TypeModule,
+>>>>>>> ariana
   ],
   controllers: [AppController],
   providers: [AppService],
