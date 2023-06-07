@@ -19,7 +19,7 @@ export class CreateProductDto {
   @IsArray({ always: true })
   @IsString({ each: true })
   @IsOptional()
-  tags: string[];
+  types: string[];
 
   @IsArray({ always: true })
   @IsString({ each: true })

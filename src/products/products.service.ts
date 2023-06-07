@@ -4,28 +4,28 @@ import { UpdateProductDto } from "./dto/update-product.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from "./entities/product.entity";
 import { In, Repository } from "typeorm";
-import { Tag } from "src/tags/entities/tag.entity";
 import { Category } from "src/categories/entities/category.entity";
+import { Type } from "src/type/entities/type.entity";
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
-    @InjectRepository(Tag)
-    private tagRepo: Repository<Tag>,
+    @InjectRepository(Type)
+    private typeRepo: Repository<Type>,
     @InjectRepository(Category)
     private categoryRepo: Repository<Category>
   ) {}
 
   async create(createProductDto: CreateProductDto) {
-    const { tags, categories, ...productData } = createProductDto;
+    const { types, categories, ...productData } = createProductDto;
 
-    let tagsModels = [];
+    let typesModels = [];
     let categoriesModels = [];
-    if (createProductDto.tags) {
-      tagsModels = await this.tagRepo.find({
-        where: { name: In([...createProductDto.tags]) },
+    if (createProductDto.types) {
+      typesModels = await this.typeRepo.find({
+        where: { name: In([...createProductDto.types]) },
       });
     }
     if (createProductDto.categories) {
@@ -37,7 +37,7 @@ export class ProductsService {
     const model = this.productRepository.create({
       ...productData,
       categories: categoriesModels,
-      tags: tagsModels,
+      types: typesModels,
     });
     await this.productRepository.save(model);
 
@@ -53,13 +53,13 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
-    const { tags, categories, ...productData } = updateProductDto;
+    const { types, categories, ...productData } = updateProductDto;
 
-    let tagsModels = [];
+    let typeModels = [];
     let categoriesModels = [];
-    if (updateProductDto.tags) {
-      tagsModels = await this.tagRepo.find({
-        where: { name: In([...updateProductDto.tags]) },
+    if (updateProductDto.types) {
+      typeModels = await this.typeRepo.find({
+        where: { name: In([...updateProductDto.types]) },
       });
     }
     if (updateProductDto.categories) {
@@ -72,7 +72,7 @@ export class ProductsService {
       id,
       ...productData,
       categories: categoriesModels,
-      tags: tagsModels,
+      types: typeModels,
     });
 
     if (!product) {

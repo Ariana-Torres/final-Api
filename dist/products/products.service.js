@@ -28,21 +28,21 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const product_entity_1 = require("./entities/product.entity");
 const typeorm_2 = require("typeorm");
-const tag_entity_1 = require("../tags/entities/tag.entity");
 const category_entity_1 = require("../categories/entities/category.entity");
+const type_entity_1 = require("../type/entities/type.entity");
 let ProductsService = class ProductsService {
-    constructor(productRepository, tagRepo, categoryRepo) {
+    constructor(productRepository, typeRepo, categoryRepo) {
         this.productRepository = productRepository;
-        this.tagRepo = tagRepo;
+        this.typeRepo = typeRepo;
         this.categoryRepo = categoryRepo;
     }
     async create(createProductDto) {
-        const { tags, categories } = createProductDto, productData = __rest(createProductDto, ["tags", "categories"]);
-        let tagsModels = [];
+        const { types, categories } = createProductDto, productData = __rest(createProductDto, ["types", "categories"]);
+        let typesModels = [];
         let categoriesModels = [];
-        if (createProductDto.tags) {
-            tagsModels = await this.tagRepo.find({
-                where: { name: (0, typeorm_2.In)([...createProductDto.tags]) },
+        if (createProductDto.types) {
+            typesModels = await this.typeRepo.find({
+                where: { name: (0, typeorm_2.In)([...createProductDto.types]) },
             });
         }
         if (createProductDto.categories) {
@@ -50,7 +50,7 @@ let ProductsService = class ProductsService {
                 where: { name: (0, typeorm_2.In)([...createProductDto.categories]) },
             });
         }
-        const model = this.productRepository.create(Object.assign(Object.assign({}, productData), { categories: categoriesModels, tags: tagsModels }));
+        const model = this.productRepository.create(Object.assign(Object.assign({}, productData), { categories: categoriesModels, types: typesModels }));
         await this.productRepository.save(model);
         return model;
     }
@@ -61,12 +61,12 @@ let ProductsService = class ProductsService {
         return this.productRepository.findOneBy({ id });
     }
     async update(id, updateProductDto) {
-        const { tags, categories } = updateProductDto, productData = __rest(updateProductDto, ["tags", "categories"]);
-        let tagsModels = [];
+        const { types, categories } = updateProductDto, productData = __rest(updateProductDto, ["types", "categories"]);
+        let typeModels = [];
         let categoriesModels = [];
-        if (updateProductDto.tags) {
-            tagsModels = await this.tagRepo.find({
-                where: { name: (0, typeorm_2.In)([...updateProductDto.tags]) },
+        if (updateProductDto.types) {
+            typeModels = await this.typeRepo.find({
+                where: { name: (0, typeorm_2.In)([...updateProductDto.types]) },
             });
         }
         if (updateProductDto.categories) {
@@ -74,7 +74,7 @@ let ProductsService = class ProductsService {
                 where: { name: (0, typeorm_2.In)([...updateProductDto.categories]) },
             });
         }
-        const product = await this.productRepository.preload(Object.assign(Object.assign({ id }, productData), { categories: categoriesModels, tags: tagsModels }));
+        const product = await this.productRepository.preload(Object.assign(Object.assign({ id }, productData), { categories: categoriesModels, types: typeModels }));
         if (!product) {
             throw new common_1.NotFoundException(`Product with ID ${id} not found`);
         }
@@ -91,7 +91,7 @@ let ProductsService = class ProductsService {
 ProductsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(product_entity_1.Product)),
-    __param(1, (0, typeorm_1.InjectRepository)(tag_entity_1.Tag)),
+    __param(1, (0, typeorm_1.InjectRepository)(type_entity_1.Type)),
     __param(2, (0, typeorm_1.InjectRepository)(category_entity_1.Category)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         typeorm_2.Repository,
