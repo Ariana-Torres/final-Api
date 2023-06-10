@@ -23,6 +23,7 @@ export class ProductsService {
 
     let typesModels = [];
     let categoriesModels = [];
+
     if (createProductDto.types) {
       typesModels = await this.typeRepo.find({
         where: { name: In([...createProductDto.types]) },
